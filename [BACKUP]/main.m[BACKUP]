@@ -1,0 +1,71 @@
+% %Initialization
+%close all;
+clear all;
+% %RUIJIA
+% addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\biosig')); %to add the right library
+% addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\eeglab13_4_4b'));
+% load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\laplacian_16_10-20_mi.mat');
+% load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_location_16_10-20_mi.mat');
+% %SEB
+% % addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/biosig'));
+% % addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Projects - Common material-20180301\eeglab13_4_4b'));
+% % load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/laplacian_16_10-20_mi.mat');
+% % load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/channel_location_16_10-20_mi.mat');
+
+%% Import
+% [filename] = ImportFiles();
+% [data,event] = ConcatenateFiles(filename);
+
+%% Epoch
+% id_hands = 773;
+% id_feet = 771;
+% id_baseline = 786;
+
+%id_trial = id_hands;
+
+data_id = ExtractEpoch(data, event, id_trial);
+data_id_follow = ExtractFollowingEpoch(data, event, id_trial);
+data_epoch = [data_id; data_id_follow];
+data_baseline = ExtractPastEpoch(data, event, id_trial);
+
+%% Filtering
+[data_filtered] = FilterFreq3D(data_epoch);
+[baseline_filtered] = FilterFreq3D(data_baseline);
+
+[data_car] = FilterCar3D(data_filtered);
+[baseline_car] = FilterCar3D(baseline_filtered);
+
+[data_lap] = FilterSmallLap3D(data_filtered,lap);
+[baseline_lap] = FilterSmallLap3D(baseline_filtered,lap);
+
+%% Power
+welch_data_car = PowerWelch3D(data_car);
+welch_data_lap = PowerWelch3D(data_lap);
+
+welch_baseline_car = PowerWelch3D(baseline_car);
+welch_baseline_lap = PowerWelch3D(baseline_lap);
+
+% PlotWelch(welch_baseline_lap(:,1,2));
+% PlotWelch(welch_data_lap(:,1,2));
+
+data_car_power = DataPower3D(data_car);
+data_lap_power = DataPower3D(data_lap);
+
+baseline_car_power = DataPower3D(baseline_car);
+baseline_lap_power = DataPower3D(baseline_lap);
+
+%% Enveloppe
+SR = 512;
+enveloppe_data_car = SignalEnveloppe(data_car_power,SR);
+enveloppe_data_lap = SignalEnveloppe(data_lap_power,SR);
+
+%% Baseline preprocessing
+% baseline_car_temp = [baseline_car; baseline_car];
+% baseline_lap_temp = [baseline_lap; baseline_lap];
+% 
+% data_car = data_car - baseline_car_temp;
+% data_lap = data_lap - baseline_lap_temp;
+
+%% Topoplot
+%topoplot16(data_car, chanlocs16);
+topoplot16(data_lap, chanlocs16);

@@ -3,10 +3,10 @@ close all;
 %clear all;
 
 % %RUIJIA
-addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\biosig')); %to add the right library
-addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\eeglab13_4_4b'));
-load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\laplacian_16_10-20_mi.mat');
-load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_location_16_10-20_mi.mat');
+% addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\biosig')); %to add the right library
+% addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\eeglab13_4_4b'));
+% load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\laplacian_16_10-20_mi.mat');
+% load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_location_16_10-20_mi.mat');
 
 % %SEB
 % addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/biosig'));
@@ -15,10 +15,10 @@ load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_loca
 % load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/channel_location_16_10-20_mi.mat');
 
 % % Emilie
-% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
-% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
-% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
-% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
+addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
+addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
+load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
+load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
 
 %% Import
 [filename] = ImportFiles();
@@ -58,6 +58,8 @@ h3.EVENT.DUR = floor(h3.EVENT.DUR/32);
 %% Concatenate
 [PSD_car, event_car] = ConcatenatePSD(PSD_car_1, PSD_car_2, PSD_car_3, h1, h2, h3);
 [PSD_lap, event_lap] = ConcatenatePSD(PSD_lap_1, PSD_lap_2, PSD_lap_3, h1, h2, h3);
+
+labels_trials = [ones(1, length(PSD_car_1)), 2*ones(1, length(PSD_car_2)), 3*ones(1, length(PSD_car_3))]';
 
 [labels_car] = MakeLabels(PSD_car, event_car);
 [labels_lap] = MakeLabels(PSD_lap, event_lap);

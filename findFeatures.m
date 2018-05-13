@@ -13,7 +13,7 @@ labels = labels_(trial_labels==TrialNb);
 FisherScore = zeros(23,16);
 for i = 1:16 
     for j = 1:23
-        FisherScore(j,i) = abs(mean(log(PSD(labels==771,j,i)))-mean(log(PSD(labels==773,j,i))))/sqrt(std(log(PSD(labels==771,j,i)))+std(log(PSD(labels==773,j,i))));
+        FisherScore(j,i) = abs(mean(log(PSD(labels==771,j,i)))-mean(log(PSD(labels==773,j,i))))./sqrt(std(log(PSD(labels==771,j,i))).^2+std(log(PSD(labels==773,j,i))).^2);
     end
 end
  

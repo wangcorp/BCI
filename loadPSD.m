@@ -3,10 +3,10 @@ close all;
 %clear all;
 
 % %RUIJIA
-addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\biosig')); %to add the right library
-addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\eeglab13_4_4b'));
-load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\laplacian_16_10-20_mi.mat');
-load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_location_16_10-20_mi.mat');
+% addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\biosig')); %to add the right library
+% addpath(genpath('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\eeglab13_4_4b'));
+% load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\laplacian_16_10-20_mi.mat');
+% load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_location_16_10-20_mi.mat');
 
 % %SEB
 % addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/biosig'));
@@ -15,10 +15,10 @@ load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_loca
 % load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/channel_location_16_10-20_mi.mat');
 
 % % Emilie
-% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
-% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
-% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
-% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
+addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
+addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
+load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
+load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
 
 
 %% load PSD files
@@ -83,29 +83,31 @@ colorbar;
 axis('auto');
 
 %% Discriminancy
+
+% Visually check and select features that are stable across runs!
  
 % CAR
-%Trial 1
-Features_car_trial1 = findFeatures(PSD_car, labels_car, labels_trials, 1);
-plotDistribution(PSD_car(labels_trials==1,:,:), labels_car(labels_trials==1), Features_car_trial1, 1, 'CAR');
+%Run 1
+Features_car_run1 = findFeatures(PSD_car, labels_car, labels_runs, 1);
+plotDistribution(PSD_car(labels_runs==1,:,:), labels_car(labels_runs==1), Features_car_run1, 1, 'CAR');
 
-%Trial 2
-Features_car_trial2 = findFeatures(PSD_car, labels_car, labels_trials, 2);
-plotDistribution(PSD_car(labels_trials==2,:,:), labels_car(labels_trials==2), Features_car_trial2, 1, 'CAR');
+%Run 2
+Features_car_run2 = findFeatures(PSD_car, labels_car, labels_runs, 2);
+plotDistribution(PSD_car(labels_runs==2,:,:), labels_car(labels_runs==2), Features_car_run2, 1, 'CAR');
 
-%Trial 3
-Features_car_trial3 = findFeatures(PSD_car, labels_car, labels_trials, 3);
-plotDistribution(PSD_car(labels_trials==3,:,:), labels_car(labels_trials==3), Features_car_trial3, 1, 'CAR');
+%Run 3
+Features_car_run3 = findFeatures(PSD_car, labels_car, labels_runs, 3);
+plotDistribution(PSD_car(labels_runs==3,:,:), labels_car(labels_runs==3), Features_car_run3, 1, 'CAR');
 
 % LAPLACIAN
-%Trial 1
-Features_lap_trial1 = findFeatures(PSD_lap, labels_lap, labels_trials, 1);
-plotDistribution(PSD_lap(labels_trials==1,:,:), labels_lap(labels_trials==1), Features_lap_trial1, 1, 'Laplacian');
+%Run 1
+Features_lap_run1 = findFeatures(PSD_lap, labels_lap, labels_runs, 1);
+plotDistribution(PSD_lap(labels_runs==1,:,:), labels_lap(labels_runs==1), Features_lap_run1, 1, 'Laplacian');
 
-%Trial 2
-Features_lap_trial2 = findFeatures(PSD_lap, labels_lap, labels_trials, 2);
-plotDistribution(PSD_lap(labels_trials==2,:,:), labels_lap(labels_trials==2), Features_lap_trial2, 1, 'Laplacian');
+%Run 2
+Features_lap_run2 = findFeatures(PSD_lap, labels_lap, labels_runs, 2);
+plotDistribution(PSD_lap(labels_runs==2,:,:), labels_lap(labels_runs==2), Features_lap_run2, 1, 'Laplacian');
 
-%Trial 3
-Features_lap_trial3 = findFeatures(PSD_lap, labels_lap, labels_trials, 3);
-plotDistribution(PSD_lap(labels_trials==3,:,:), labels_lap(labels_trials==3), Features_lap_trial3, 1, 'Laplacian');
+%Run 3
+Features_lap_run3 = findFeatures(PSD_lap, labels_lap, labels_runs, 3);
+plotDistribution(PSD_lap(labels_runs==3,:,:), labels_lap(labels_runs==3), Features_lap_run3, 1, 'Laplacian');

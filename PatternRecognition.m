@@ -104,3 +104,11 @@ xticklabels({'', 'Class 1 (Feet)', '', 'Class -1 (Hands)'});
 yticklabels({'', 'Class 1 (Feet)', '', 'Class -1 (Hands)'}); 
 colorbar; xlabel('Decoded classes'); ylabel('True classes');
 title('Confusion matrix of the decoder');
+
+%% Structure creation
+support.model = classifier;
+support.alpha = alpha;
+support.lap = lap;
+support.feat = [sel_freq;sel_chan];
+support.car = false;
+save('support.mat', 'support');

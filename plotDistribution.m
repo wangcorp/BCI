@@ -5,7 +5,6 @@ function plotDistribution(PSD, labels, Features, FeatureNumber, FilteringMode)
 
 FreqDistr = 4:2:48;
 
-figure();
 histogram(log(PSD(labels==771,Features(1,FeatureNumber),Features(2,FeatureNumber))));
 hold on;
 histogram(log(PSD(labels==773,Features(1,FeatureNumber),Features(2,FeatureNumber))));

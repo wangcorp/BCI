@@ -47,8 +47,8 @@ classifier = fitcdiscr(PSD_feat_car, labels_feat);
 
 %% Test data formating
 % Using features selected from training data
-main;
-for i=1:length(sel_chan);
+DataPreprocessing;
+for i=1:length(sel_chan)
     if i==1
         PSD_feat_car_online = PSD_car(:, sel_freq(1), sel_chan(1));
     end

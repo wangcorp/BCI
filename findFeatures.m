@@ -18,14 +18,6 @@ for i = 1:16
 end
 
 FS_temp = FisherScore;
-% Frequencies x channels heat map
-% figure();
-% imagesc(FisherScore')
-% colorbar
-% ylabel('Channels')
-% xlabel('Frequencies')
-% title("Fisher Score for all couple channels/frequencies for run " + num2str(RunNb));
-
 
 % Finds the indexes of the best 10 pair of channel-freq. according to
 % Fisher score
@@ -41,7 +33,7 @@ for i=1:10
     BestChannels(i) = I_col;
 end
 
-BestFeatures = [BestFreqs; BestChannels]
+BestFeatures = [BestFreqs; BestChannels];
 
 end
 

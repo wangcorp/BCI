@@ -9,6 +9,8 @@ function [] = PlotWelch( welch3D )
        
       figure;
       shadedErrorBar([],mine, SD)
+      xlabel('Frequency');
+      ylabel('PSD');
        
     end
 

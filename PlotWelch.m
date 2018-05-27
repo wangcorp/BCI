@@ -9,6 +9,7 @@ function [] = PlotWelch( welch3D )
        
       figure;
       shadedErrorBar([],mine, SD)
+      title('Mean PSD and related std as a function of frequency');
       xlabel('Frequency');
       ylabel('PSD');
        

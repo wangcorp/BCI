@@ -122,7 +122,7 @@ subplot(2,3,1,'Parent',p)
 imagesc(FisherScoreC1')
 colorbar
 ylabel('Channels')
-xlabel('Frequencies [Hz]')
+xlabel('Frequencies')
 title(" Run 1 - CAR");
 
 
@@ -132,7 +132,7 @@ subplot(2,3,2,'Parent',p)
 imagesc(FisherScoreC2')
 colorbar
 ylabel('Channels')
-xlabel('Frequencies [Hz]')
+xlabel('Frequencies')
 title("Run 2 - CAR");
 
 
@@ -142,7 +142,7 @@ subplot(2,3,3,'Parent',p)
 imagesc(FisherScoreC3')
 colorbar
 ylabel('Channels')
-xlabel('Frequencies [Hz]')
+xlabel('Frequencies')
 title("Run 3 - CAR");
 
 
@@ -153,7 +153,7 @@ subplot(2,3,4,'Parent',p)
 imagesc(FisherScoreL1')
 colorbar
 ylabel('Channels')
-xlabel('Frequencies [Hz]')
+xlabel('Frequencies')
 title("Run 1 - LAP");
 
 %Run 2
@@ -162,7 +162,7 @@ subplot(2,3,5,'Parent',p)
 imagesc(FisherScoreL2')
 colorbar
 ylabel('Channels')
-xlabel('Frequencies [Hz]')
+xlabel('Frequencies')
 title("Run 2 - LAP");
 
 %Run 3
@@ -171,7 +171,7 @@ subplot(2,3,6,'Parent',p)
 imagesc(FisherScoreL3')
 colorbar
 ylabel('Channels')
-xlabel('Frequencies [Hz]')
+xlabel('Frequencies')
 title("Run 3 - LAP");
 
 %Distributions

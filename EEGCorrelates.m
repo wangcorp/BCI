@@ -27,7 +27,7 @@ load(filename);
 
 %% Parameters
 FreqGrid = 4:2:48;
-RandomBands = 18:23;
+RandomBands = 8:20;
 [~, RandomBandsId] = intersect(FreqGrid, RandomBands);
 
 
@@ -125,7 +125,6 @@ ylabel('Channels')
 xlabel('Frequencies')
 title(" Run 1 - CAR");
 
-
 %Run 2
 subplot(2,3,2,'Parent',p)
 [Features_car_run2, FisherScoreC2] = findFeatures(PSD_car, labels_car, labels_runs, 2);
@@ -186,8 +185,4 @@ plotDistribution(PSD_lap(labels_runs==2,:,:), labels_lap(labels_runs==2), Featur
 plotDistribution(PSD_lap(labels_runs==3,:,:), labels_lap(labels_runs==3), Features_lap_run3, 1, 'Laplacian');
 
 
-%% Power
-
-PW = PowerWelch(data_lap_2);
-PlotWelch(PW)
 

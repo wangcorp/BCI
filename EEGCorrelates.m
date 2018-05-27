@@ -111,28 +111,78 @@ caxis([-15 15]);
  
 % CAR
 %Run 1
-Features_car_run1 = findFeatures(PSD_car, labels_car, labels_runs, 1);
-plotDistribution(PSD_car(labels_runs==1,:,:), labels_car(labels_runs==1), Features_car_run1, 1, 'CAR');
+f = figure;
+p = uipanel('Parent',f,'BorderType','none'); 
+p.Title = 'Fisher Score for all couple channels/frequencies'; 
+p.TitlePosition = 'centertop'; 
+p.FontSize = 12;
+p.FontWeight = 'bold';
+subplot(2,3,1,'Parent',p)
+[Features_car_run1, FisherScoreC1] = findFeatures(PSD_car, labels_car, labels_runs, 1);
+imagesc(FisherScoreC1')
+colorbar
+ylabel('Channels')
+xlabel('Frequencies [Hz]')
+title(" Run 1 - CAR");
+
 
 %Run 2
-Features_car_run2 = findFeatures(PSD_car, labels_car, labels_runs, 2);
-plotDistribution(PSD_car(labels_runs==2,:,:), labels_car(labels_runs==2), Features_car_run2, 1, 'CAR');
+subplot(2,3,2,'Parent',p)
+[Features_car_run2, FisherScoreC2] = findFeatures(PSD_car, labels_car, labels_runs, 2);
+imagesc(FisherScoreC2')
+colorbar
+ylabel('Channels')
+xlabel('Frequencies [Hz]')
+title("Run 2 - CAR");
+
 
 %Run 3
-Features_car_run3 = findFeatures(PSD_car, labels_car, labels_runs, 3);
-plotDistribution(PSD_car(labels_runs==3,:,:), labels_car(labels_runs==3), Features_car_run3, 1, 'CAR');
+subplot(2,3,3,'Parent',p)
+[Features_car_run3, FisherScoreC3] = findFeatures(PSD_car, labels_car, labels_runs, 3);
+imagesc(FisherScoreC3')
+colorbar
+ylabel('Channels')
+xlabel('Frequencies [Hz]')
+title("Run 3 - CAR");
+
 
 % LAPLACIAN
 %Run 1
-Features_lap_run1 = findFeatures(PSD_lap, labels_lap, labels_runs, 1);
-plotDistribution(PSD_lap(labels_runs==1,:,:), labels_lap(labels_runs==1), Features_lap_run1, 1, 'Laplacian');
+subplot(2,3,4,'Parent',p)
+[Features_lap_run1, FisherScoreL1] = findFeatures(PSD_lap, labels_lap, labels_runs, 1);
+imagesc(FisherScoreL1')
+colorbar
+ylabel('Channels')
+xlabel('Frequencies [Hz]')
+title("Run 1 - LAP");
 
 %Run 2
-Features_lap_run2 = findFeatures(PSD_lap, labels_lap, labels_runs, 2);
-plotDistribution(PSD_lap(labels_runs==2,:,:), labels_lap(labels_runs==2), Features_lap_run2, 1, 'Laplacian');
+subplot(2,3,5,'Parent',p)
+[Features_lap_run2, FisherScoreL2] = findFeatures(PSD_lap, labels_lap, labels_runs, 2);
+imagesc(FisherScoreL2')
+colorbar
+ylabel('Channels')
+xlabel('Frequencies [Hz]')
+title("Run 2 - LAP");
 
 %Run 3
-Features_lap_run3 = findFeatures(PSD_lap, labels_lap, labels_runs, 3);
+subplot(2,3,6,'Parent',p)
+[Features_lap_run3, FisherScoreL3] = findFeatures(PSD_lap, labels_lap, labels_runs, 3);
+imagesc(FisherScoreL3')
+colorbar
+ylabel('Channels')
+xlabel('Frequencies [Hz]')
+title("Run 3 - LAP");
+
+%Distributions
+%CAR
+plotDistribution(PSD_car(labels_runs==1,:,:), labels_car(labels_runs==1), Features_car_run1, 1, 'CAR');
+plotDistribution(PSD_car(labels_runs==2,:,:), labels_car(labels_runs==2), Features_car_run2, 1, 'CAR');
+plotDistribution(PSD_car(labels_runs==3,:,:), labels_car(labels_runs==3), Features_car_run3, 1, 'CAR');
+
+%LAP
+plotDistribution(PSD_lap(labels_runs==1,:,:), labels_lap(labels_runs==1), Features_lap_run1, 1, 'Laplacian');
+plotDistribution(PSD_lap(labels_runs==2,:,:), labels_lap(labels_runs==2), Features_lap_run2, 1, 'Laplacian');
 plotDistribution(PSD_lap(labels_runs==3,:,:), labels_lap(labels_runs==3), Features_lap_run3, 1, 'Laplacian');
 
 

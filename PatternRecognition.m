@@ -67,6 +67,7 @@ alpha=0.05;
 trial_continuous = true;
 y_down = 0.3;
 y_up = 0.7;
+
 dt_total = [];
 
 event_trial = find(event_lap(:,1)==771 | event_lap(:,1)==773);
@@ -139,6 +140,7 @@ switch trial_continuous
 end
 
 %% Plot Task classifier
+figure;
 hold on
 for i=1:length(event_trial)
     if event_lap(event_trial(i),1) == 771

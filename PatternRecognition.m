@@ -174,8 +174,8 @@ C(:,3) = C(:,3) ./ sum(C(:,3));
  
 figure();
 imagesc(C);
-xticklabels({'', 'Class -1 (Hands)','', 'No decision','', 'Class 1 (Feet)'}); 
-yticklabels({'','Class -1 (Hands)','', 'No decision','', 'Class 1 (Feet)'}); 
+xticklabels({'', 'Class 773 (Hands)','', 'No decision','', 'Class 771 (Feet)'}); 
+yticklabels({'','Class 773 (Hands)','', 'No decision','', 'Class 771 (Feet)'}); 
 colorbar; xlabel('True classes'); ylabel('Decoded classes');
 title('Confusion matrix of the decoder');
 

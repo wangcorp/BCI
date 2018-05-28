@@ -9,10 +9,10 @@ close all;
 % load('C:\Users\Ruijia\Documents\EPFL\BCI\Project - Commmon material\channel_location_16_10-20_mi.mat');
 
 % RUIJIA - home
-addpath(genpath('C:\Users\Waz\Documents\EPFL\BCI\Common\biosig'));
-addpath(genpath('C:\Users\Waz\Documents\EPFL\BCI\Common\eeglab13_4_4b'));
-load('C:\Users\Waz\Documents\EPFL\BCI\Common\laplacian_16_10-20_mi.mat');
-load('C:\Users\Waz\Documents\EPFL\BCI\Common\channel_location_16_10-20_mi.mat');
+% addpath(genpath('C:\Users\Waz\Documents\EPFL\BCI\Common\biosig'));
+% addpath(genpath('C:\Users\Waz\Documents\EPFL\BCI\Common\eeglab13_4_4b'));
+% load('C:\Users\Waz\Documents\EPFL\BCI\Common\laplacian_16_10-20_mi.mat');
+% load('C:\Users\Waz\Documents\EPFL\BCI\Common\channel_location_16_10-20_mi.mat');
 
 %SEB
 % addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/biosig'));
@@ -21,10 +21,10 @@ load('C:\Users\Waz\Documents\EPFL\BCI\Common\channel_location_16_10-20_mi.mat');
 % load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/channel_location_16_10-20_mi.mat');
 
 % % Emilie
-% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
-% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
-% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
-% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
+addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
+addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
+load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
+load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
 
 
 %% load PSD files
@@ -208,5 +208,10 @@ plotDistribution(PSD_lap(labels_runs==2,:,:), labels_lap(labels_runs==2), Featur
 subplot(2,3,6,'Parent',p2)
 plotDistribution(PSD_lap(labels_runs==3,:,:), labels_lap(labels_runs==3), Features_lap_run3, 1, 'Laplacian');
 
-
-
+% Histogram + Boxplot for one feature
+%Here: Run 1, CAR filtering, First Feature
+figure;
+subplot(1,2,1);
+plotDistribution(PSD_car(labels_runs==1,:,:), labels_car(labels_runs==1), Features_car_run1, 2, 'CAR');
+subplot(1,2,2);
+FeatureBoxplot(PSD_car, labels_car(labels_runs==1), Features_car_run1, 2);

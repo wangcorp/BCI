@@ -15,16 +15,16 @@ close all;
 % load('C:\Users\Waz\Documents\EPFL\BCI\Common\channel_location_16_10-20_mi.mat');
 
 %SEB
-% addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/biosig'));
-% addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Projects - Common material-20180301/eeglab13_4_4b'));
-% load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/laplacian_16_10-20_mi.mat');
-% load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/channel_location_16_10-20_mi.mat');
+addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/biosig'));
+addpath(genpath('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Projects - Common material-20180301/eeglab13_4_4b'));
+load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/laplacian_16_10-20_mi.mat');
+load('/Users/sebh/Dropbox/EPFL2/EPFL/1MASTER/Semestre2/BCI/Project/ai6_micontinuous/20180316/channel_location_16_10-20_mi.mat');
 
 % % Emilie
-addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
-addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
-load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
-load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
+% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/biosig'));
+% addpath(genpath('/Users/emilierevol/Desktop/BCI/Project 2 - Naturally controlling a MI BCI-driven robot/project2-data-example/eeglab13_4_4b'));
+% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/laplacian_16_10-20_mi.mat');
+% load('/Users/emilierevol/Desktop/BCI/Projects - Common material/channel_location_16_10-20_mi.mat');
 
 
 %% load PSD files
@@ -33,7 +33,7 @@ load(filename);
 
 %% Parameters
 FreqGrid = 4:2:48;
-RandomBands = 13:18;
+RandomBands = 13:20;
 [~, RandomBandsId] = intersect(FreqGrid, RandomBands);
 
 
@@ -133,6 +133,7 @@ subplot(2,3,1,'Parent',p)
 [Features_car_run1, FisherScoreC1] = findFeatures(PSD_car, labels_car, labels_runs, 1);
 imagesc(FisherScoreC1')
 colorbar
+caxis([0 0.8]);
 ylabel('Channels')
 xlabel('Frequencies')
 title("Run 1 - CAR");
@@ -142,6 +143,7 @@ subplot(2,3,2,'Parent',p)
 [Features_car_run2, FisherScoreC2] = findFeatures(PSD_car, labels_car, labels_runs, 2);
 imagesc(FisherScoreC2')
 colorbar
+caxis([0 0.8]);
 ylabel('Channels')
 xlabel('Frequencies')
 title("Run 2 - CAR");
@@ -151,6 +153,7 @@ subplot(2,3,3,'Parent',p)
 [Features_car_run3, FisherScoreC3] = findFeatures(PSD_car, labels_car, labels_runs, 3);
 imagesc(FisherScoreC3')
 colorbar
+caxis([0 0.8]);
 ylabel('Channels')
 xlabel('Frequencies')
 title("Run 3 - CAR");
@@ -161,6 +164,7 @@ subplot(2,3,4,'Parent',p)
 [Features_lap_run1, FisherScoreL1] = findFeatures(PSD_lap, labels_lap, labels_runs, 1);
 imagesc(FisherScoreL1')
 colorbar
+caxis([0 0.8]);
 ylabel('Channels')
 xlabel('Frequencies')
 title("Run 1 - LAP");
@@ -170,6 +174,7 @@ subplot(2,3,5,'Parent',p)
 [Features_lap_run2, FisherScoreL2] = findFeatures(PSD_lap, labels_lap, labels_runs, 2);
 imagesc(FisherScoreL2')
 colorbar
+caxis([0 0.8]);
 ylabel('Channels')
 xlabel('Frequencies')
 title("Run 2 - LAP");
@@ -179,6 +184,7 @@ subplot(2,3,6,'Parent',p)
 [Features_lap_run3, FisherScoreL3] = findFeatures(PSD_lap, labels_lap, labels_runs, 3);
 imagesc(FisherScoreL3')
 colorbar
+caxis([0 0.8]);
 ylabel('Channels')
 xlabel('Frequencies')
 title("Run 3 - LAP");

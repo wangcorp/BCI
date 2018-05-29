@@ -49,7 +49,7 @@ labels_feat = labels_lap(labels_lap==771 | labels_lap==773);
 
 %% Training
 classifier = fitcdiscr(PSD_feat_lap, labels_feat);
-[yhat, score] = predict(classifier, PSD_feat_lap);
+%[yhat, score] = predict(classifier, PSD_feat_lap);
 
 %% Test data formating
 % Using features selected from training data
@@ -63,10 +63,16 @@ end
 PSD_feat_lap_online = log(PSD_feat_lap_online);
 
 %% Classifier (testing)
+%Tweakable variables
 alpha=0.05;
 trial_continuous = true;
 y_down = 0.3;
 y_up = 0.7;
+%ROC VARIABLES:
+FPR = [];
+TPR = [];
+AUC = [];
+sco_on = [];
 
 dt_total = [];
 
@@ -90,6 +96,8 @@ switch trial_continuous
                 [yhat_online,score_online] = predict(classifier,PSD_feat_lap_online(event_lap(event_trial(trialID),2)+windowID-1,:));
                 ppt = score_online(:,2); % Column 1: feet (773), column 2: hands (771)
                 dt=[dt,ppt*alpha + dt(:,windowID-1)*(1-alpha)];
+                sco_on = [sco_on; score_online]; %For the ROC
+
                 if dt(windowID) >= y_up
                     decision(trialID)=1; % hands
                     break
@@ -117,6 +125,8 @@ switch trial_continuous
             trial_start = (windowID == event_lap(event_trial,2));
             trial_start_sort = sort(trial_start);
             
+            sco_on = [sco_on; score_online]; %For the ROC
+
             if trial_start_sort(end)==1
                 current_trial=find(trial_start==1);
                 trial_counter = trial_counter+1;
@@ -145,11 +155,25 @@ switch trial_continuous
                     trial_check = false;
                 end
             end
-            
+
             dt_memory(windowID)=dt;
             
         end
 end
+
+%% ROC VALUES and plotting:
+labels_lap = labels_lap(2:end); %Starting from window 2                                    
+[FPR, TPR, ~, AUC] = perfcurve(labels_lap(labels_lap==771 | labels_lap==773), sco_on((labels_lap==771 | labels_lap==773),2), 773);
+x = linspace(0,1,10);
+y = linspace(0,1,10);
+plot(FPR,TPR,'-r')
+hold on
+plot(x,y,'--b')
+xlabel('False positive rate') 
+ylabel('True positive rate')
+te = ['Mean AUC: ', num2str(mean(AUC))];
+title('ROC curve')
+text(0.6,0.2,te);
 
 %% Plot Task classifier
 figure;
@@ -161,14 +185,17 @@ for i=1:length(event_trial)
         rectangle('Position', [event_lap(event_trial(i),2) 0 event_lap(event_trial(i),3)+event_lap(event_trial(i)+1,3) 1], 'FaceColor', [1 0 0 0.2],'LineStyle','none');
     end
 end
-plot(dt_memory, 'Color', 'k');
-line([0,length(PSD_feat_lap_online)],[y_down,y_down], 'Color', 'k');
-line([0,length(PSD_feat_lap_online)],[y_up,y_up], 'Color', 'k');
-% xlim([2000 3200]);
-title('Posterior probability as a function of time window and task');
-xlabel('time window [-]');
-ylabel('posterior probability [-]');
-hold off
+
+if trial_continuous = true
+    plot(dt_memory, 'Color', 'k');
+    line([0,length(PSD_feat_lap_online)],[y_down,y_down], 'Color', 'k');
+    line([0,length(PSD_feat_lap_online)],[y_up,y_up], 'Color', 'k');
+    % xlim([2000 3200]);
+    title('Posterior probability as a function of time window and task');
+    xlabel('time window [-]');
+    ylabel('posterior probability [-]');
+    hold off
+end
 
 %% Classifier performance evaluation
 %time estimation
@@ -213,5 +240,5 @@ support.model = classifier;
 support.alpha = alpha;
 support.lap = lap;
 support.feat = [sel_freq;sel_chan];
-support.lap = false;
+support.car = false;
 save('support.mat', 'support');

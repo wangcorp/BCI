@@ -184,16 +184,29 @@ end
 classification_error = miss_class/length(decision_true);
 class_error = classerror(decision_true, decision); 
 
-C = confusionmat(decision, decision_true);
-C(:,1) = C(:,1) ./ sum(C(:,1));
-C(:,3) = C(:,3) ./ sum(C(:,3));
- 
-figure();
-imagesc(C);
-xticklabels({'', 'Class 773 (Hands)','', 'No decision','', 'Class 771 (Feet)'}); 
-yticklabels({'','Class 773 (Hands)','', 'No decision','', 'Class 771 (Feet)'}); 
-colorbar; xlabel('True classes'); ylabel('Decoded classes');
-title('Confusion matrix of the decoder');
+if ismember(0,decision)==1
+    C = confusionmat(decision, decision_true);
+    C(:,1) = C(:,1) ./ sum(C(:,1));
+    C(:,3) = C(:,3) ./ sum(C(:,3));
+    
+    figure();
+    imagesc(C);
+    xticklabels({'', 'Class 773 (Hands)','', 'No decision','', 'Class 771 (Feet)'}); 
+    yticklabels({'','Class 773 (Hands)','', 'No decision','', 'Class 771 (Feet)'}); 
+    colorbar; xlabel('True classes'); ylabel('Decoded classes');
+    title('Confusion matrix of the decoder');
+else 
+    C = confusionmat(decision, decision_true);
+    C(:,1) = C(:,1) ./ sum(C(:,1));
+    C(:,2) = C(:,2) ./ sum(C(:,2));
+
+    figure();
+    imagesc(C);
+    xticklabels({'', 'Class 773 (Hands)','', 'Class 771 (Feet)'}); 
+    yticklabels({'','Class 773 (Hands)','', 'Class 771 (Feet)'}); 
+    colorbar; xlabel('True classes'); ylabel('Decoded classes');
+    title('Confusion matrix of the decoder');
+end
 
 %% Structure creation
 support.model = classifier;

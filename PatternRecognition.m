@@ -186,7 +186,7 @@ for i=1:length(event_trial)
     end
 end
 
-if trial_continuous = true
+if trial_continuous == true
     plot(dt_memory, 'Color', 'k');
     line([0,length(PSD_feat_lap_online)],[y_down,y_down], 'Color', 'k');
     line([0,length(PSD_feat_lap_online)],[y_up,y_up], 'Color', 'k');

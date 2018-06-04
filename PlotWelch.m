@@ -3,17 +3,17 @@ function [] = PlotWelch( welch3D )
 %   well well well
 
     for i = 1:size(welch3D,3)
-       wel = 10*log(welch3D(:,:,i));
+       wel = 10*log(welch3D(:,:,i)+1);
        mine = mean(wel,2);
        SD = std(wel,0,2);
        
-      figure;
+%      figure;
       shadedErrorBar([],mine, SD)
       title('Mean PSD and related std as a function of frequency');
       xlabel('Frequency');
       ylabel('PSD');
-       
+      xlim([0 48]);
     end
-
+    
 end
 
